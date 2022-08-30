@@ -18,7 +18,7 @@ exports.getAllMakes = async (req, res) => {
     try {
         const makes = await Vehicle.find()
         console.log(makes)
-        res.send(makes)
+        res.send({makes})
     } catch (error) {
         console.log(error);
         res.send({ error })
