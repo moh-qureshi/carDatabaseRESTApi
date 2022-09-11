@@ -11,7 +11,7 @@ const vehicleSchema = new mongoose.Schema({
         body_type: String,
         model_logo: String,
         engine_size: String,
-        car_img: String
+        car_img: Array
     }]
 })
 
