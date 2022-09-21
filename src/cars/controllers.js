@@ -28,11 +28,12 @@ exports.getAllMakes = async (req, res) => {
 exports.getMake = async (req, res) => {
     try {
         const vehicleObj = {make: req.body.make};
-        const make = await Vehicle.findOne(vehicleObj.name);
-        console.log(make);
+        const make = await Vehicle.findOne( {"make.name": req.params.make} ).exec()
+        console.log({make});
         res.send({make});
     } catch (error) {
         console.log(error);
         res.send({ error })
     }
 };
+
