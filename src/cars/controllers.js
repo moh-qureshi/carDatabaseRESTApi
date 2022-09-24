@@ -17,7 +17,6 @@ exports.addVehicle = async (req, res) =>{
 exports.getAllMakes = async (req, res) => {
     try {
         const makes = await Vehicle.find()
-        console.log(makes)
         res.send({makes})
     } catch (error) {
         console.log(error);
@@ -27,10 +26,32 @@ exports.getAllMakes = async (req, res) => {
 
 exports.getMake = async (req, res) => {
     try {
-        const vehicleObj = {make: req.body.make};
         const make = await Vehicle.findOne( {"make.name": req.params.make} ).exec()
-        console.log({make});
         res.send({make});
+    } catch (error) {
+        console.log(error);
+        res.send({ error })
+    }
+};
+
+exports.getModel = async (req, res) => {
+    try {
+        const model = await Vehicle.aggregate([
+            {
+              '$match': {
+                'make.name': req.params.make
+              }
+            }, {
+              '$unwind': {
+                'path': '$model'
+              }
+            }, {
+              '$match': {
+                'model.name': req.params.model
+              }
+            }
+          ]).exec()
+        res.send({model});
     } catch (error) {
         console.log(error);
         res.send({ error })
