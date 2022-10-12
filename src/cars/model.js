@@ -10,8 +10,11 @@ const vehicleSchema = new mongoose.Schema({
         name: String,
         body_type: String,
         model_logo: String,
-        engine_size: String,
-        car_img: Array
+        fuel_type: String,
+        doors: String,
+        people: String,
+        car_img: Array,
+        features: Array
     }]
 })
 

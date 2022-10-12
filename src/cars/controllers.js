@@ -58,3 +58,30 @@ exports.getModel = async (req, res) => {
     }
 };
 
+exports.updateVehicle = async (req, res) =>{
+  try {
+    const model = await Vehicle.aggregate( [
+      {
+        '$match': {
+          'make.name': req.params.make
+        }
+      }, {
+        '$unwind': {
+          'path': '$model'
+        }
+      }, {
+        '$match': {
+          'model.name': req.params.model
+        }
+      },
+      {
+        //Change "model.name" to field to change/add
+        '$addFields': { 'model.name': req.params.updatedEntry }
+      }
+    ]).exec() 
+    res.send({model}) 
+  } catch (error) {
+    console.log(error);
+    res.send({ error })
+  }
+}
