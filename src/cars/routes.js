@@ -7,5 +7,5 @@ vehicleRouter.post("/vehicle", addVehicle);
 vehicleRouter.get("/vehicles", getAllMakes)
 vehicleRouter.get("/vehicles/:make", getMake)
 vehicleRouter.get("/vehicles/:make/:model", getModel)
-vehicleRouter.patch("/vehicles/update/:make/:model/:newModelName", updateVehicle)
+vehicleRouter.patch("/vehicles/update/:make/:model/", updateVehicle)
 module.exports = vehicleRouter;
