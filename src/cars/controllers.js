@@ -23,9 +23,8 @@ exports.getAllMakes = async (req, res) => {
 
 exports.getMake = async (req, res) => {
     try {
-        const make = await Vehicle.findOne( {"name": req.params.make} ).exec()
-        const test = make.name
-        res.send({test});
+        const make = await Vehicle.find( {"make.name": req.params.make} ).exec()
+        res.send({make});
     } catch (error) {
         console.log(error);
         res.send({ error })
